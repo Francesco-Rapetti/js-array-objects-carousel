@@ -20,13 +20,11 @@ body {
 }
 
 #content {
-    /* width: 80%; */
     height: var(--img-height);
     overflow: hidden;
 }
 
 #img-container {
-    /* width: 80%; */
     width: var(--img-width);
 }
 

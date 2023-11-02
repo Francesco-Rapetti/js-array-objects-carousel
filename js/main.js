@@ -13,31 +13,65 @@ const images = [
     "img/05.webp"
 ]
 
-let selected;
+// last image hidden on top
 arrayContainer.innerHTML = `<div class="preview"><img src="${images[images.length-1]}"><div class="filter"></div></div>` + arrayContainer.innerHTML;
+// generate side images 
 for (let i = 0; i < images.length; i++) {
     container.innerHTML += `<img class="position-absolute" src="${images[i]}">`
     arrayContainer.innerHTML += `<div class="preview"><img src="${images[i]}"><div class="filter"></div></div>`;
 }
+// first image hidden at bottom
 arrayContainer.innerHTML += `<div class="preview"><img src="${images[0]}"><div class="filter"></div></div>`;
+// right images array
 const previews = document.getElementsByClassName('preview');
+// left images array
 const bigImgs = document.querySelectorAll('#img-container > *');
-console.log(bigImgs)
+// middle image display
 previews[3].classList.add('no-filter');
 bigImgs[currentImg].style.opacity = 1;
 
-
+// up button
 upBtn.addEventListener("click", function() {
-    console.log('bottone premuto');
     shiftCardsUp(previews);
 })
 
+const shiftCardsUp = async (previews) => {
+    // before animations
+    upBtn.classList.add('disabled');
+    previews[3].classList.remove('no-filter');
+    previews[2].classList.add('no-filter');
+    bigImgs[currentImg].style.opacity = 0;
+    currentImg--;
+    if (currentImg < 0) {
+        currentImg = bigImgs.length-1;
+    }
+    bigImgs[currentImg].style.opacity = 1;
+    let bottom = 0;
+    for (let i = 0; i < previews.length; i++) {
+        previews[i].style.bottom = `${bottom}px`;
+    }
+
+    await delay(500);
+
+    // after animations
+    arrayContainer.innerHTML = previews[previews.length-3].outerHTML + arrayContainer.innerHTML;
+    console.log(previews[previews.length-4].outerHTML)
+    previews[previews.length-1].remove();
+    bottom = imgHeight;
+    for (let i = 0; i < previews.length; i++) {
+        previews[i].style.bottom = `${bottom}px`;
+        console.log(bottom);
+    }
+    upBtn.classList.remove('disabled');
+}
+
+// down button
 downBtn.addEventListener("click", function() {
-    console.log("bottone premuto");
     shiftCardsDown(previews);
 })
 
 const shiftCardsDown = async (previews) => {
+    // before animations
     downBtn.classList.add('disabled');
     previews[3].classList.remove('no-filter');
     previews[4].classList.add('no-filter');
@@ -52,7 +86,10 @@ const shiftCardsDown = async (previews) => {
         previews[i].style.bottom = `${bottom}px`;
         console.log(bottom);
     }
+
     await delay(500);
+
+    // after animations
     arrayContainer.innerHTML += previews[2].outerHTML;
     previews[0].remove();
     bottom = imgHeight;
@@ -63,31 +100,3 @@ const shiftCardsDown = async (previews) => {
     downBtn.classList.remove('disabled');
 }
 
-const shiftCardsUp = async (previews) => {
-    upBtn.classList.add('disabled');
-    previews[3].classList.remove('no-filter');
-    previews[2].classList.add('no-filter');
-    bigImgs[currentImg].style.opacity = 0;
-    currentImg--;
-    if (currentImg < 0) {
-        currentImg = bigImgs.length-1;
-    }
-    bigImgs[currentImg].style.opacity = 1;
-    let bottom = 0;
-    for (let i = 0; i < previews.length; i++) {
-        previews[i].style.bottom = `${bottom}px`;
-        console.log(bottom);
-    }
-
-    await delay(500);
-
-    arrayContainer.innerHTML = previews[previews.length-3].outerHTML + arrayContainer.innerHTML;
-    console.log(previews[previews.length-4].outerHTML)
-    previews[previews.length-1].remove();
-    bottom = imgHeight;
-    for (let i = 0; i < previews.length; i++) {
-        previews[i].style.bottom = `${bottom}px`;
-        console.log(bottom);
-    }
-    upBtn.classList.remove('disabled');
-}
