@@ -19,20 +19,20 @@ for (let i = 0; i < images.length; i++) {
     arrayContainer.innerHTML += `<div class="preview"><img src="${images[i]}"><div class="filter"></div></div>`;
 }
 arrayContainer.innerHTML += `<div class="preview"><img src="${images[0]}"><div class="filter"></div></div>`;
+const previews = document.getElementsByClassName('preview');
+previews[3].classList.add('no-filter');
 
 upBtn.addEventListener("click", function() {
     console.log('bottone premuto');
-    const previews = document.getElementsByClassName('preview');
     shiftCardsUp(previews);
 })
 
 downBtn.addEventListener("click", function() {
     console.log("bottone premuto");
-    const previews = document.getElementsByClassName('preview');
     shiftCardsDown(previews);
 })
 
-const shiftCardsUp = async (previews) => {
+const shiftCardsDown = async (previews) => {
     upBtn.classList.add('disabled');
     previews[3].classList.remove('no-filter');
     previews[4].classList.add('no-filter');
@@ -52,7 +52,7 @@ const shiftCardsUp = async (previews) => {
     upBtn.classList.remove('disabled');
 }
 
-const shiftCardsDown = async (previews) => {
+const shiftCardsUp = async (previews) => {
     downBtn.classList.add('disabled');
     previews[3].classList.remove('no-filter');
     previews[2].classList.add('no-filter');
@@ -62,7 +62,9 @@ const shiftCardsDown = async (previews) => {
         previews[i].style.bottom = `${bottom}px`;
         console.log(bottom);
     }
+
     await delay(500);
+
     arrayContainer.innerHTML = previews[previews.length-3].outerHTML + arrayContainer.innerHTML;
     console.log(previews[previews.length-4].outerHTML)
     previews[previews.length-1].remove();
