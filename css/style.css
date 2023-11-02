@@ -1,5 +1,36 @@
+:root {
+    --img-width: 1200px;
+    --img-height: 536px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#content {
+    /* width: 80%; */
+}
+
+#img-container {
+    /* width: 80%; */
+    width: var(--img-width);
+    height: var(--img-height);
+}
+
+#array-container {
+    width: calc(var(--img-width) / 5);
+}
+
+#array-container .preview {
+    width: 100%;
+    height: calc(var(--img-height) / 5);
 }
