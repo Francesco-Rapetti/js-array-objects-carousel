@@ -1,6 +1,7 @@
 :root {
     --img-width: 1200px;
     --img-height: 536px;
+    --button-width: 40px;
 }
 
 * {
@@ -18,19 +19,49 @@ body {
 
 #content {
     /* width: 80%; */
+    height: var(--img-height);
+    /* overflow: hidden; */
 }
 
 #img-container {
     /* width: 80%; */
     width: var(--img-width);
-    height: var(--img-height);
 }
 
 #array-container {
     width: calc(var(--img-width) / 5);
+    position: relative;
+    z-index: 0;
+    bottom: calc(var(--img-height) / 5);
 }
 
 #array-container .preview {
     width: 100%;
     height: calc(var(--img-height) / 5);
+    position: relative;
+    transition: all .5s ease-in-out;
+    overflow: hidden;
+}
+
+#array-container .preview > * {
+    width: 100%;
+    /* height: 100%; */
+    height: calc(var(--img-height) / 5);
+
+}
+
+button {
+    width: var(--button-width);
+    border-radius: 50%!important;
+    position: absolute;
+    z-index: 2;
+    left: calc(((var(--img-width) / 5) / 2) - (var(--button-width) / 2));
+}
+
+button#up {
+    top: calc((var(--img-height) / 5) + 10px);
+}
+
+button#down {
+    top: calc(((var(--img-height) + var(--img-height) / 5) - 10px) - var(--button-width));
 }
