@@ -1,7 +1,7 @@
 :root {
     --img-width: 1200px;
     --img-height: 536px;
-    --button-width: 40px;
+    --button-width: 30px;
 }
 
 * {
@@ -11,6 +11,7 @@
 }
 
 body {
+    background-color: #222222!important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,13 +46,17 @@ body {
 }
 
 #array-container .preview {
+    background-color: rgba(255, 255, 255, 0.3)!important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(9.7px);
+    -webkit-backdrop-filter: blur(9.7px);
     bottom: calc(var(--img-height) / 5);
     width: 100%;
     height: calc(var(--img-height) / 5);
     position: relative;
     transition: all .5s ease-in-out;
     overflow: hidden;
-    border: 0px solid red;
+    border: 0px solid transparent;
 }
 
 #array-container .preview > .filter {
@@ -63,7 +68,7 @@ body {
 }
 
 #array-container .preview.no-filter {
-    border: red 4px solid;
+    border: transparent 4px solid;
 }
 
 #array-container .preview.no-filter > .filter {
@@ -72,13 +77,18 @@ body {
 
 #array-container .preview > * {
     width: 100%;
-    /* height: 100%; */
     height: calc(var(--img-height) / 5);
 
 }
 
 button {
+    background-color: rgba(255, 255, 255, 0.3)!important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(9.7px);
+    -webkit-backdrop-filter: blur(9.7px);
+    border: 0!important;
     width: var(--button-width);
+    height: var(--button-width);
     border-radius: 50%!important;
     position: absolute;
     z-index: 2;
@@ -95,4 +105,8 @@ button#down {
 
 #button-container {
     bottom: 105px;
+}
+
+i {
+    font-size: 16px;
 }
