@@ -33,7 +33,7 @@ downBtn.addEventListener("click", function() {
 })
 
 const shiftCardsDown = async (previews) => {
-    upBtn.classList.add('disabled');
+    downBtn.classList.add('disabled');
     previews[3].classList.remove('no-filter');
     previews[4].classList.add('no-filter');
     let bottom = imgHeight * 2;
@@ -49,14 +49,13 @@ const shiftCardsDown = async (previews) => {
         previews[i].style.bottom = `${bottom}px`;
         console.log(bottom);
     }
-    upBtn.classList.remove('disabled');
+    downBtn.classList.remove('disabled');
 }
 
 const shiftCardsUp = async (previews) => {
-    downBtn.classList.add('disabled');
+    upBtn.classList.add('disabled');
     previews[3].classList.remove('no-filter');
     previews[2].classList.add('no-filter');
-    // console.log(filterOne)
     let bottom = 0;
     for (let i = 0; i < previews.length; i++) {
         previews[i].style.bottom = `${bottom}px`;
@@ -73,5 +72,5 @@ const shiftCardsUp = async (previews) => {
         previews[i].style.bottom = `${bottom}px`;
         console.log(bottom);
     }
-    downBtn.classList.remove('disabled');
+    upBtn.classList.remove('disabled');
 }
