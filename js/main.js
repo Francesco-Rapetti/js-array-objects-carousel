@@ -1,6 +1,9 @@
+const delay = ms => new Promise(res => setTimeout(res, ms));
+let bottom;
+const imgHeight = 107.2;
 const container = document.getElementById('img-container');
 const arrayContainer = document.getElementById('array-container');
-const upBtn = document.getElementById('up');
+const upBtn = document.getElementById("up");
 const downBtn = document.getElementById('down');
 const images = [
     "img/01.webp",
@@ -17,3 +20,51 @@ for (let i = 0; i < images.length; i++) {
 }
 arrayContainer.innerHTML += `<div class="preview"><img src="${images[0]}"></div>`;
 
+upBtn.addEventListener("click", function() {
+    console.log('bottone premuto');
+    const previews = document.getElementsByClassName('preview');
+    shiftCardsUp(previews);
+})
+
+downBtn.addEventListener("click", function() {
+    console.log("bottone premuto");
+    const previews = document.getElementsByClassName('preview');
+    shiftCardsDown(previews);
+})
+
+const shiftCardsUp = async (previews) => {
+    upBtn.classList.add('disabled');
+    bottom = imgHeight * 2;
+    for (let i = 0; i < previews.length; i++) {
+        previews[i].style.bottom = `${bottom}px`;
+        console.log(bottom);
+    }
+    await delay(500);
+    arrayContainer.innerHTML += previews[2].outerHTML;
+    previews[0].remove();
+    bottom = imgHeight;
+    for (let i = 0; i < previews.length; i++) {
+        previews[i].style.bottom = `${bottom}px`;
+        console.log(bottom);
+    }
+    upBtn.classList.remove('disabled');
+}
+
+const shiftCardsDown = async (previews) => {
+    downBtn.classList.add('disabled');
+    bottom = 0;
+    for (let i = 0; i < previews.length; i++) {
+        previews[i].style.bottom = `${bottom}px`;
+        console.log(bottom);
+    }
+    await delay(500);
+    arrayContainer.innerHTML = previews[previews.length-3].outerHTML + arrayContainer.innerHTML;
+    console.log(previews[previews.length-4].outerHTML)
+    previews[previews.length-1].remove();
+    bottom = imgHeight;
+    for (let i = 0; i < previews.length; i++) {
+        previews[i].style.bottom = `${bottom}px`;
+        console.log(bottom);
+    }
+    downBtn.classList.remove('disabled');
+}

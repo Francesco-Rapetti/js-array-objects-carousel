@@ -15,6 +15,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 #content {
@@ -32,13 +33,16 @@ body {
     width: calc(var(--img-width) / 5);
     position: relative;
     z-index: 0;
-    bottom: calc(var(--img-height) / 5);
+    transition: all .5s ease-in-out;
+
 }
 
 #array-container .preview {
+    bottom: calc(var(--img-height) / 5);
     width: 100%;
     height: calc(var(--img-height) / 5);
     position: relative;
+    /* z-index: -1; */
     transition: all .5s ease-in-out;
     overflow: hidden;
 }
