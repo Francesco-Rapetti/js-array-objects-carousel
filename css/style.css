@@ -21,7 +21,7 @@ body {
 #content {
     /* width: 80%; */
     height: var(--img-height);
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 #img-container {
@@ -42,9 +42,20 @@ body {
     width: 100%;
     height: calc(var(--img-height) / 5);
     position: relative;
-    /* z-index: -1; */
     transition: all .5s ease-in-out;
     overflow: hidden;
+}
+
+#array-container .preview > .filter {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 1);
+    opacity: .5;
+    transition: all .5s ease-in-out;
+}
+
+#array-container .preview.no-filter > .filter {
+    opacity: 0!important;
 }
 
 #array-container .preview > * {
