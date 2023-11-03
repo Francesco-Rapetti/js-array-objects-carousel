@@ -33,6 +33,8 @@ body {
     transition: all .5s ease-in-out;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 #array-container {
@@ -76,7 +78,8 @@ body {
 #array-container .preview > * {
     width: 100%;
     height: calc(var(--img-height) / 5);
-
+    object-fit: cover;
+    object-position: center;
 }
 
 button {
