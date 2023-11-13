@@ -274,6 +274,7 @@ function toggleAutoPlay() {
             } else {
                 shiftCardsUp(previews, true)
             }
+            changeText();
         }, 3000);
         playPauseBtn.innerHTML = '<i class="fa-solid fa-pause text-white"></i>';
     } else {
