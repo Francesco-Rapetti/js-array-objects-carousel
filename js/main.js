@@ -260,6 +260,11 @@ function thumbnailsInteraction() {
     });
 }
 
+/**
+ * Toggles the autoplay feature.
+ *
+ * @return {void} 
+ */
 function toggleAutoPlay() {
     playing = !playing;
     if (playing) {
