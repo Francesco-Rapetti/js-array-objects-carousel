@@ -68,6 +68,13 @@ downBtn.addEventListener("click", function() {
     changeText();
 })
 
+/**
+ * Shifts the cards up in the previews array.
+ *
+ * @param {Array} previews - The array of preview elements.
+ * @param {boolean} buttonDisabled - A flag indicating if the button is disabled.
+ * @return {Promise} A promise that resolves when the shifting animation is complete.
+ */
 const shiftCardsUp = async (previews, buttonDisabled) => {
     // before animations
     if (buttonDisabled) {
@@ -106,9 +113,13 @@ const shiftCardsUp = async (previews, buttonDisabled) => {
     thumbnailsInteraction();
 }
 
-
-
-
+/**
+ * Shifts the cards down in the previews array.
+ *
+ * @param {Array} previews - The array of card previews.
+ * @param {boolean} buttonDisabled - Whether the button is disabled.
+ * @return {void} This function does not return anything.
+ */
 const shiftCardsDown = async (previews, buttonDisabled) => {
     // before animations
     if (buttonDisabled) {
@@ -148,6 +159,13 @@ const shiftCardsDown = async (previews, buttonDisabled) => {
     thumbnailsInteraction();
 }
 
+/**
+ * Selects an image based on the value of 'i' and performs corresponding actions.
+ *
+ * @param {number} i - The value to determine the action to be performed.
+ * @param {Array} previews - An array of previews.
+ * @return {undefined} No return value.
+ */
 const selectImage = async (i, previews) => {
     switch (i) {
         case 1:
@@ -176,6 +194,11 @@ const selectImage = async (i, previews) => {
     changeText();
 }
 
+/**
+ * Change the text content of the title and description elements with a fade effect.
+ *
+ * @return {Promise<void>} A Promise that resolves when the text has been changed.
+ */
 const changeText = async () => {
     title.style.opacity = 0;
     description.style.opacity = 0;
@@ -188,11 +211,22 @@ const changeText = async () => {
     description.style.opacity = 1;
 }
 
+/**
+ * Toggles the 'disabled' class on the upBtn and downBtn elements.
+ *
+ * @param {type} None
+ * @return {type} None
+ */
 function buttonToggle() {
     upBtn.classList.toggle('disabled');
     downBtn.classList.toggle('disabled');
 }
 
+/**
+ * Makes all thumbnails clickable.
+ *
+ * @return {undefined} No return value
+ */
 function thumbnailsInteraction() {
     Array.from(previews).forEach((preview, i) => {
         preview.addEventListener("click", function() {
