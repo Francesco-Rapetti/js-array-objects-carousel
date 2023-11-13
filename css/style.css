@@ -55,7 +55,7 @@ body {
     width: 100%;
     height: calc(var(--img-height) / 5);
     position: relative;
-    transition: all .5s ease-in-out;
+    transition: all .5s linear;
     overflow: hidden;
     border: 0px solid transparent;
     cursor: pointer;
