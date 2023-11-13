@@ -13,6 +13,7 @@ const playPauseBtn = document.getElementById('play-pause');
 const reverseBtn = document.getElementById('reverse');
 let reversed = false;
 let playing = false;
+let myInterval;
 const images = [
     {
         image: 'img/01.webp',
@@ -58,23 +59,24 @@ description.innerText = images[currentImg].text;
 thumbnailsInteraction();
 
 
-
 // up button
 upBtn.addEventListener("click", function() {
     shiftCardsUp(previews, true);
     changeText();
-    
+    if (playing) toggleAutoPlay();
 })
 
 // down button
 downBtn.addEventListener("click", function() {
     shiftCardsDown(previews, true);
     changeText();
+    if (playing) toggleAutoPlay();
 })
 
 // reverse button
 reverseBtn.addEventListener("click", async () => {
     reversed = !reversed;
+    console.log(reversed)
     reverseBtn.style.rotate = "-360deg";
     await delay(400);
     reverseBtn.style.transition = "none";
@@ -84,14 +86,7 @@ reverseBtn.addEventListener("click", async () => {
 });
 
 // play/pause button
-playPauseBtn.addEventListener("click", function() {
-    playing = !playing;
-    if (playing) {
-        this.innerHTML = '<i class="fa-solid fa-pause text-white"></i>';
-    } else {
-        this.innerHTML = '<i class="fa-solid fa-play text-white"></i>';
-    }
-});
+playPauseBtn.addEventListener("click", toggleAutoPlay);
 
 /**
  * Shifts the cards up in the previews array.
@@ -257,7 +252,27 @@ function thumbnailsInteraction() {
         preview.addEventListener("click", function() {
             if (!animation) {
                 selectImage(i, previews);
+                if (playing) {
+                    toggleAutoPlay();
+                }
             }
         })
     });
+}
+
+function toggleAutoPlay() {
+    playing = !playing;
+    if (playing) {
+        myInterval = setInterval(function () {
+            if (!reversed) {
+                shiftCardsDown(previews, true)
+            } else {
+                shiftCardsUp(previews, true)
+            }
+        }, 1500);
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause text-white"></i>';
+    } else {
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-play text-white"></i>';
+        clearInterval(myInterval);
+    }
 }
