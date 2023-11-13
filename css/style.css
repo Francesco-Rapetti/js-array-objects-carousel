@@ -22,6 +22,7 @@ body {
 #content {
     height: var(--img-height);
     overflow: hidden;
+    position: relative;
 }
 
 #img-container {
@@ -112,11 +113,18 @@ i {
     font-size: 16px;
 }
 
+p {
+    margin-bottom: 0!important;
+}
+
 h1, p {
     /* position: absolute;
     right: 0px;
     bottom: 0;
     text-align: end!important; */
+    position: relative;
+    /* bottom: 135px; */
+    transition: all .25s ease-in-out;
 }
 
 #title {
@@ -134,8 +142,9 @@ h1, p {
     text-align: end;
     background-color: #2222223f;
     width: var(--img-width);
-    bottom: 10px;
+    bottom: 0px;
     padding-left: 24px;
     padding-right: 24px;
     height: 200px;
+    /* overflow: hidden; */
 }

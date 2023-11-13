@@ -2,6 +2,7 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 let currentImg = 2;
 const imgHeight = 107.2;
 const container = document.getElementById('img-container');
+const textContainer = document.getElementById('text-container');
 const title = document.getElementById('title');
 const description = document.getElementById('description');
 const arrayContainer = document.getElementById('array-container');
@@ -47,10 +48,13 @@ const bigImgs = document.querySelectorAll('#img-container > *');
 // middle image display
 previews[3].classList.add('no-filter');
 bigImgs[currentImg].style.opacity = 1;
+title.innerText = images[currentImg].title;
+description.innerText = images[currentImg].text;
 
 // up button
 upBtn.addEventListener("click", function() {
     shiftCardsUp(previews);
+    changeText();
 })
 
 const shiftCardsUp = async (previews) => {
@@ -86,6 +90,7 @@ const shiftCardsUp = async (previews) => {
 // down button
 downBtn.addEventListener("click", function() {
     shiftCardsDown(previews);
+    changeText();
 })
 
 const shiftCardsDown = async (previews) => {
@@ -94,21 +99,28 @@ const shiftCardsDown = async (previews) => {
     previews[3].classList.remove('no-filter');
     previews[4].classList.add('no-filter');
     bigImgs[currentImg].style.opacity = 0;
+    // title.style.opacity = 0;
+    // description.style.opacity = 0;
     currentImg++;
     if (currentImg >= bigImgs.length) {
         currentImg = 0;
     }
     bigImgs[currentImg].style.opacity = 1;
+    
     let bottom = imgHeight * 2;
     for (let i = 0; i < previews.length; i++) {
         previews[i].style.bottom = `${bottom}px`;
         console.log(bottom);
     }
-
+    
     await delay(500);
-
+    
     // after animations
     arrayContainer.innerHTML += previews[2].outerHTML;
+    // title.innerHTML = images[currentImg].title;
+    // description.innerHTML = images[currentImg].text;
+    // title.style.opacity = 1;
+    // description.style.opacity = 1;
     previews[0].remove();
     bottom = imgHeight;
     for (let i = 0; i < previews.length; i++) {
@@ -116,5 +128,17 @@ const shiftCardsDown = async (previews) => {
         console.log(bottom);
     }
     downBtn.classList.remove('disabled');
+}
+
+const changeText = async () => {
+    title.style.opacity = 0;
+    description.style.opacity = 0;
+    
+    await delay(250);
+    
+    title.innerHTML = images[currentImg].title;
+    description.innerHTML = images[currentImg].text;
+    title.style.opacity = 1;
+    description.style.opacity = 1;
 }
 
