@@ -269,7 +269,7 @@ function toggleAutoPlay() {
             } else {
                 shiftCardsUp(previews, true)
             }
-        }, 1500);
+        }, 3000);
         playPauseBtn.innerHTML = '<i class="fa-solid fa-pause text-white"></i>';
     } else {
         playPauseBtn.innerHTML = '<i class="fa-solid fa-play text-white"></i>';
