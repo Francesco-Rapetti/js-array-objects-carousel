@@ -9,6 +9,10 @@ const description = document.getElementById('description');
 const arrayContainer = document.getElementById('array-container');
 const upBtn = document.getElementById("up");
 const downBtn = document.getElementById('down');
+const playPauseBtn = document.getElementById('play-pause');
+const reverseBtn = document.getElementById('reverse');
+let reversed = false;
+let playing = false;
 const images = [
     {
         image: 'img/01.webp',
@@ -67,6 +71,27 @@ downBtn.addEventListener("click", function() {
     shiftCardsDown(previews, true);
     changeText();
 })
+
+// reverse button
+reverseBtn.addEventListener("click", async () => {
+    reversed = !reversed;
+    reverseBtn.style.rotate = "-360deg";
+    await delay(400);
+    reverseBtn.style.transition = "none";
+    reverseBtn.style.rotate = "0deg";
+    await delay(10);
+    reverseBtn.style.transition = "all .4s ease-in-out";
+});
+
+// play/pause button
+playPauseBtn.addEventListener("click", function() {
+    playing = !playing;
+    if (playing) {
+        this.innerHTML = '<i class="fa-solid fa-pause text-white"></i>';
+    } else {
+        this.innerHTML = '<i class="fa-solid fa-play text-white"></i>';
+    }
+});
 
 /**
  * Shifts the cards up in the previews array.
