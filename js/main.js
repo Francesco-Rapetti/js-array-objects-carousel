@@ -1,5 +1,6 @@
 const delay = ms => new Promise(res => setTimeout(res, ms));
 let currentImg = 2;
+let animation = false;
 const imgHeight = 107.2;
 const container = document.getElementById('img-container');
 const textContainer = document.getElementById('text-container');
@@ -11,7 +12,7 @@ const downBtn = document.getElementById('down');
 const images = [
     {
         image: 'img/01.webp',
-        title: 'Marvel\'s Spiderman Miles Morale',
+        title: 'Marvel\'s Spiderman Miles Morales',
         text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
     }, {
         image: 'img/02.webp',
@@ -50,16 +51,29 @@ previews[3].classList.add('no-filter');
 bigImgs[currentImg].style.opacity = 1;
 title.innerText = images[currentImg].title;
 description.innerText = images[currentImg].text;
+thumbnailsInteraction();
+
+
 
 // up button
 upBtn.addEventListener("click", function() {
-    shiftCardsUp(previews);
+    shiftCardsUp(previews, true);
+    changeText();
+    
+})
+
+// down button
+downBtn.addEventListener("click", function() {
+    shiftCardsDown(previews, true);
     changeText();
 })
 
-const shiftCardsUp = async (previews) => {
+const shiftCardsUp = async (previews, buttonDisabled) => {
     // before animations
-    upBtn.classList.add('disabled');
+    if (buttonDisabled) {
+        buttonToggle();
+    }
+    animation = true;
     previews[3].classList.remove('no-filter');
     previews[2].classList.add('no-filter');
     bigImgs[currentImg].style.opacity = 0;
@@ -84,23 +98,26 @@ const shiftCardsUp = async (previews) => {
         previews[i].style.bottom = `${bottom}px`;
         console.log(bottom);
     }
-    upBtn.classList.remove('disabled');
+    animation = false;
+    if (buttonDisabled) {
+        buttonToggle();
+    }
+
+    thumbnailsInteraction();
 }
 
-// down button
-downBtn.addEventListener("click", function() {
-    shiftCardsDown(previews);
-    changeText();
-})
 
-const shiftCardsDown = async (previews) => {
+
+
+const shiftCardsDown = async (previews, buttonDisabled) => {
     // before animations
-    downBtn.classList.add('disabled');
+    if (buttonDisabled) {
+        buttonToggle();
+    }
+    animation = true;
     previews[3].classList.remove('no-filter');
     previews[4].classList.add('no-filter');
     bigImgs[currentImg].style.opacity = 0;
-    // title.style.opacity = 0;
-    // description.style.opacity = 0;
     currentImg++;
     if (currentImg >= bigImgs.length) {
         currentImg = 0;
@@ -117,17 +134,46 @@ const shiftCardsDown = async (previews) => {
     
     // after animations
     arrayContainer.innerHTML += previews[2].outerHTML;
-    // title.innerHTML = images[currentImg].title;
-    // description.innerHTML = images[currentImg].text;
-    // title.style.opacity = 1;
-    // description.style.opacity = 1;
     previews[0].remove();
     bottom = imgHeight;
     for (let i = 0; i < previews.length; i++) {
         previews[i].style.bottom = `${bottom}px`;
         console.log(bottom);
     }
-    downBtn.classList.remove('disabled');
+    animation = false;
+    if (buttonDisabled) {
+        buttonToggle();
+    }
+
+    thumbnailsInteraction();
+}
+
+const selectImage = async (i, previews) => {
+    switch (i) {
+        case 1:
+            buttonToggle();
+            shiftCardsUp(previews, false);
+            await delay(510);
+            shiftCardsUp(previews, true);
+            buttonToggle();
+            break;
+        case 2:
+            shiftCardsUp(previews, true);
+            break;
+        case 4:
+            shiftCardsDown(previews, true);
+            break;
+        case 5:
+            buttonToggle();
+            shiftCardsDown(previews, false);
+            await delay(510);
+            shiftCardsDown(previews, true);
+            buttonToggle();
+            break;
+        default:
+            break;
+        }
+    changeText();
 }
 
 const changeText = async () => {
@@ -142,3 +188,17 @@ const changeText = async () => {
     description.style.opacity = 1;
 }
 
+function buttonToggle() {
+    upBtn.classList.toggle('disabled');
+    downBtn.classList.toggle('disabled');
+}
+
+function thumbnailsInteraction() {
+    Array.from(previews).forEach((preview, i) => {
+        preview.addEventListener("click", function() {
+            if (!animation) {
+                selectImage(i, previews);
+            }
+        })
+    });
+}
