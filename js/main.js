@@ -2,26 +2,44 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 let currentImg = 2;
 const imgHeight = 107.2;
 const container = document.getElementById('img-container');
+const title = document.getElementById('title');
+const description = document.getElementById('description');
 const arrayContainer = document.getElementById('array-container');
 const upBtn = document.getElementById("up");
 const downBtn = document.getElementById('down');
 const images = [
-    "img/01.webp",
-    "img/02.webp",
-    "img/03.webp",
-    "img/04.webp",
-    "img/05.webp"
-]
+    {
+        image: 'img/01.webp',
+        title: 'Marvel\'s Spiderman Miles Morale',
+        text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
+    }, {
+        image: 'img/02.webp',
+        title: 'Ratchet & Clank: Rift Apart',
+        text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.',
+    }, {
+        image: 'img/03.webp',
+        title: 'Fortnite',
+        text: "Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.",
+    }, {
+        image: 'img/04.webp',
+        title: 'Stray',
+        text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city',
+    }, {
+        image: 'img/05.webp',
+        title: "Marvel's Avengers",
+        text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
+    }
+];
 
 // last image hidden on top
-arrayContainer.innerHTML = `<div class="preview"><img src="${images[images.length-1]}"><div class="filter"></div></div>` + arrayContainer.innerHTML;
+arrayContainer.innerHTML = `<div class="preview"><img src="${images[images.length-1].image}"><div class="filter"></div></div>` + arrayContainer.innerHTML;
 // generate side images 
 for (let i = 0; i < images.length; i++) {
-    container.innerHTML += `<img class="position-absolute" src="${images[i]}">`
-    arrayContainer.innerHTML += `<div class="preview"><img src="${images[i]}"><div class="filter"></div></div>`;
+    container.innerHTML += `<img class="position-absolute" src="${images[i].image}">`
+    arrayContainer.innerHTML += `<div class="preview"><img src="${images[i].image}"><div class="filter"></div></div>`;
 }
 // first image hidden at bottom
-arrayContainer.innerHTML += `<div class="preview"><img src="${images[0]}"><div class="filter"></div></div>`;
+arrayContainer.innerHTML += `<div class="preview"><img src="${images[0].image}"><div class="filter"></div></div>`;
 // right images array
 const previews = document.getElementsByClassName('preview');
 // left images array

@@ -111,3 +111,31 @@ button#down {
 i {
     font-size: 16px;
 }
+
+h1, p {
+    /* position: absolute;
+    right: 0px;
+    bottom: 0;
+    text-align: end!important; */
+}
+
+#title {
+    padding-top: 1rem;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+#description {
+    font-size: 18px;
+}
+
+#text-container {
+    position: absolute;
+    text-align: end;
+    background-color: #2222223f;
+    width: var(--img-width);
+    bottom: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+    height: 200px;
+}
