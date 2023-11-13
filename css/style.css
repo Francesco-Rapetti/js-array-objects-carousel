@@ -114,7 +114,6 @@ button#play-pause {
 button#reverse {
     top: calc((var(--img-height) / 5) + 10px);
     left: -45px;
-    transition: all .4ss ease-in-out;
 }
 
 #button-container {
